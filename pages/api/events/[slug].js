@@ -19,10 +19,10 @@ const deleteEvent = (e) => {
                               </a>
                         </Link>
                         <a href='#' 
-                           className='styles.delete' 
+                           className={styles.delete} 
                            onClick={deleteEvent}>
                                <FaTimes/>Delete Event
-                           </a>
+                        </a>
                     </div>
 
                     <span>
@@ -38,7 +38,7 @@ const deleteEvent = (e) => {
                     <p>{evt.performers}</p>
                     <h3>Description:</h3>
                     <p>{evt.description}</p>
-                    <h3>Venue: {evt.vanue}</h3>
+                    <h3>Venue: {evt.value}</h3>
                     <p>{evt.address}</p>
 
                     <Link href='/events'>
@@ -62,3 +62,43 @@ export async function getServerSideProps({query: {slug}}){
     }
   }
 }
+
+
+// export async function getStaticPaths() {
+//   const res = await fetch(`${API_URL}/events`)
+//   const events = await res.json()
+
+//   const paths = events.map((evt) => ({
+//     params: { slug: evt.slug },
+//   }))
+
+//   return {
+//     paths,
+//     fallback: true,
+//   }
+// }
+
+// export async function getStaticProps({ params: { slug } }) {
+//   const res = await fetch(`${API_URL}/events?slug=${slug}`)
+//   const events = await res.json()
+
+//   return {
+//     props: {
+//       evt: events[0],
+//     },
+//     revalidate: 1,
+//   }
+// }
+
+// const {events} = require('./data.json');
+
+// export default (req, res) =>{
+//     const evt = events.filter(ev  => ev.slug === req.query.slug)
+
+//     if(req.method === 'GET'){
+//         res.status(200).json(evt)
+//         }else {
+//           res.setHeader('Allow', ['GET'])
+//           res.status(405).json({message:`Method:${req.method} is not allowed`})
+//         }
+// }
